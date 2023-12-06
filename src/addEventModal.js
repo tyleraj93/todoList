@@ -1,9 +1,13 @@
+import Event from "./event";
 
 // I build a modal that creates a new event using 
 // a form to collect needed info
 
+const planner = [];
+
 export default function eventModal(location) {
     const dialogContainer = document.createElement("div");
+    dialogContainer.style.display = "none";
     dialogContainer.className = "dialogContainer";
     location.appendChild(dialogContainer);
 
@@ -72,4 +76,43 @@ export default function eventModal(location) {
         priority.appendChild(option);
     };
 
+    // Confirm button
+    const confirm = document.createElement("button");
+    confirm.type = "submit";
+    confirm.id = "confirm";
+    confirm.textContent = "Add event"
+    form.appendChild(confirm);
+
+    confirm.addEventListener("click", (e) => {
+        e.preventDefault();
+        const newEvent = new Event(event.value, dueDate.value, priority.value, notes.value);
+        planner.push(newEvent);
+        console.log(planner);
+        changeModalDisplay(dialogContainer);
+        document.querySelector("#addButton").textContent = "+";
+    });
+
+};
+
+// Builds modal button and changes content when clicked
+export function buildModalButton(placementLocation, modalLocation) {
+    const addButton = document.createElement("button");
+    addButton.id = "addButton"
+    addButton.textContent = "+";
+    placementLocation.appendChild(addButton);
+    addButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        changeModalDisplay(modalLocation);
+        addButton.textContent = modalLocation.style.display === "block" ? "Cancel" : "+";
+    });
 }
+
+// Changes the display of the modal
+function changeModalDisplay(modal) {
+    if (modal.style.display == "none") {
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
+    }
+};
+
