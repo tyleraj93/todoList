@@ -6,6 +6,8 @@ module.exports = {
     entry: {
         index: "./src/index.js",
         event: "./src/event.js",
+        sort: "./src/sort.js",
+        todo: "./src/todo.js",
     },
     devtool: "inline-source-map",
     devServer: {
