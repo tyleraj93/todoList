@@ -8,8 +8,8 @@ module.exports = {
         event: "./src/event.js",
         sort: "./src/sort.js",
         todo: "./src/todo.js",
+        addEventModal: "./src/addEventModal.js",
     },
-    devtool: "inline-source-map",
     devServer: {
         static: "./dist",
     },
