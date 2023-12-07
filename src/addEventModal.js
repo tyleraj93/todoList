@@ -85,13 +85,19 @@ export default function eventModal(location) {
 
     confirm.addEventListener("click", (e) => {
         e.preventDefault();
+        // Creates new event with inputs from modal
         const newEvent = new Event(event.value, dueDate.value, priority.value, notes.value);
+        // (Remove before completion) Add event to planner. Storing local instead
         planner.push(newEvent);
         console.log(planner);
-        let plannerString = JSON.stringify(planner);
-        localStorage.setItem("event", plannerString);
+        // Turns event into JSON to store locally
+        let eventString = JSON.stringify(newEvent);
+        // Currently replaces the old event
+        // Find a way to add the old event from storage
+        localStorage.setItem("event", eventString);
         clearModalInputs();
         changeModalDisplay(dialogContainer);
+        // Changes buttons text content from confirm to +
         document.querySelector("#addButton").textContent = "+";
     });
 
@@ -121,9 +127,14 @@ function changeModalDisplay(modal) {
 
 // Clears the inputs of the modal
 function clearModalInputs() {
-    const inputs = document.querySelectorAll("#dialogContainer input"); // Replace '#yourModalId' with the actual ID of your modal
+    const inputs = document.querySelectorAll("#dialogContainer input");
     inputs.forEach((input) => {
         input.value = "";
+    });
+
+    const selects = document.querySelectorAll("#dialogContainer select");
+    selects.forEach((select) => {
+        select.selectedIndex = 0;
     });
 }
 
