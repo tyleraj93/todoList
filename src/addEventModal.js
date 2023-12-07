@@ -8,7 +8,7 @@ const planner = [];
 export default function eventModal(location) {
     const dialogContainer = document.createElement("div");
     dialogContainer.style.display = "none";
-    dialogContainer.className = "dialogContainer";
+    dialogContainer.id = "dialogContainer";
     location.appendChild(dialogContainer);
 
     const form = document.createElement("form");
@@ -88,6 +88,9 @@ export default function eventModal(location) {
         const newEvent = new Event(event.value, dueDate.value, priority.value, notes.value);
         planner.push(newEvent);
         console.log(planner);
+        let plannerString = JSON.stringify(planner);
+        localStorage.setItem("event", plannerString);
+        clearModalInputs();
         changeModalDisplay(dialogContainer);
         document.querySelector("#addButton").textContent = "+";
     });
@@ -115,4 +118,12 @@ function changeModalDisplay(modal) {
         modal.style.display = "none";
     }
 };
+
+// Clears the inputs of the modal
+function clearModalInputs() {
+    const inputs = document.querySelectorAll("#dialogContainer input"); // Replace '#yourModalId' with the actual ID of your modal
+    inputs.forEach((input) => {
+        input.value = "";
+    });
+}
 
