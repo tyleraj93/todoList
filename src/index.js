@@ -7,7 +7,7 @@ import eventModal, { buildModalButton} from "./addEventModal.js";
 const content = document.getElementById("content");
 eventModal(content);
 
-const modal = document.querySelector(".dialogContainer");
+const modal = document.querySelector("#dialogContainer");
 buildModalButton(content, modal);
 
 helloWorldEvent();
