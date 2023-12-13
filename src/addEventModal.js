@@ -1,6 +1,6 @@
 import Event from "./event";
 
-// I build a modal that creates a new event using 
+// I build a modal that creates a new event using
 // a form to collect needed info
 
 const planner = [];
@@ -27,7 +27,7 @@ export default function eventModal(location) {
     labels.appendChild(title);
 
     // Input for event title
-    const event = document.createElement("input")
+    const event = document.createElement("input");
     event.setAttribute("type", "text");
     event.setAttribute("placeholder", "Event");
     event.setAttribute("required", "required");
@@ -42,13 +42,6 @@ export default function eventModal(location) {
     dueDate.className = "input date-input";
     labels.appendChild(dueDate);
 
-    // Input for additional notes
-    const notes = document.createElement("input");
-    notes.setAttribute("type", "text");
-    notes.setAttribute("placeholder", "Notes (optional)");
-    notes.className = "input notes-input";
-    labels.appendChild(notes);
-
     // Input for event priority
     const priority = document.createElement("select");
     priority.setAttribute("type", "text");
@@ -62,9 +55,8 @@ export default function eventModal(location) {
     placeholder.disabled = true;
     placeholder.selected = true;
     placeholder.hidden = true;
-    placeholder.textContent = "Ugency:"
+    placeholder.textContent = "Ugency:";
     priority.appendChild(placeholder);
-
 
     let options = ["Low", "Medium", "High"];
 
@@ -74,45 +66,43 @@ export default function eventModal(location) {
         option.value = answer;
         option.textContent = answer;
         priority.appendChild(option);
-    };
+    }
+
+    // Input for additional notes
+    const notes = document.createElement("input");
+    notes.setAttribute("type", "text");
+    notes.setAttribute("placeholder", "Notes (optional)");
+    notes.className = "input notes-input";
+    labels.appendChild(notes);
 
     // Confirm button
     const confirm = document.createElement("button");
     confirm.type = "submit";
     confirm.id = "confirm";
-    confirm.textContent = "Add event"
+    confirm.textContent = "Add event";
     form.appendChild(confirm);
 
     confirm.addEventListener("click", (e) => {
         e.preventDefault();
-        // Creates new event with inputs from modal
-        const newEvent = new Event(event.value, dueDate.value, priority.value, notes.value);
-        // (Remove before completion) Add event to planner. Storing local instead
-        planner.push(newEvent);
-        console.log(planner);
-        // Turns event into JSON to store locally
-        let eventString = JSON.stringify(newEvent);
-        // Currently replaces the old event
-        // Find a way to add the old event from storage
-        localStorage.setItem("event", eventString);
+        addEventLocal(event.value, dueDate.value, priority.value, notes.value);
         clearModalInputs();
         changeModalDisplay(dialogContainer);
         // Changes buttons text content from confirm to +
         document.querySelector("#addButton").textContent = "+";
     });
-
-};
+}
 
 // Builds modal button and changes content when clicked
 export function buildModalButton(placementLocation, modalLocation) {
     const addButton = document.createElement("button");
-    addButton.id = "addButton"
+    addButton.id = "addButton";
     addButton.textContent = "+";
     placementLocation.appendChild(addButton);
     addButton.addEventListener("click", (e) => {
         e.preventDefault();
         changeModalDisplay(modalLocation);
-        addButton.textContent = modalLocation.style.display === "block" ? "Cancel" : "+";
+        addButton.textContent =
+            modalLocation.style.display === "block" ? "Cancel" : "+";
     });
 }
 
@@ -123,7 +113,7 @@ function changeModalDisplay(modal) {
     } else {
         modal.style.display = "none";
     }
-};
+}
 
 // Clears the inputs of the modal
 function clearModalInputs() {
@@ -138,3 +128,16 @@ function clearModalInputs() {
     });
 }
 
+// Adds new event to local storage after the "add event"
+// button is clicked
+function addEventLocal(event, dueDate, priority, notes) {
+    let storedEvents = localStorage.getItem("events");
+    const newEvent = new Event(event, dueDate, priority, notes);
+    if (!storedEvents) {
+        storedEvents = [newEvent];
+    } else {
+        storedEvents = JSON.parse(storedEvents);
+        storedEvents.push(newEvent);
+    }
+    localStorage.setItem("events", JSON.stringify(storedEvents));
+};
