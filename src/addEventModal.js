@@ -151,6 +151,7 @@ function addEventLocal(event, dueDate, priority, notes) {
             storedEvents = JSON.parse(storedEvents);
             storedEvents.push(newEvent);
         }
+        storedEvents.sort((a, b) => new Date(a._date) - new Date(b._date));
         localStorage.setItem("events", JSON.stringify(storedEvents));
     }
 }
