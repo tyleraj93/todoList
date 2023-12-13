@@ -1,5 +1,5 @@
 import Event from "./event";
-import logEventDate from "./sort";
+import { storageAvailable, retrieveLocalStorage } from "./localStorage";
 
 // I build a modal that creates a new event using
 // a form to collect needed info
@@ -144,13 +144,15 @@ function clearModalInputs() {
 // Adds new event to local storage after the "add event"
 // button is clicked
 function addEventLocal(event, dueDate, priority, notes) {
-    let storedEvents = localStorage.getItem("events");
-    const newEvent = new Event(event, dueDate, priority, notes);
-    if (!storedEvents) {
-        storedEvents = [newEvent];
-    } else {
-        storedEvents = JSON.parse(storedEvents);
-        storedEvents.push(newEvent);
-    }
-    localStorage.setItem("events", JSON.stringify(storedEvents));
+    if (storageAvailable("localStorage")) {
+        let storedEvents = localStorage.getItem("events");
+        const newEvent = new Event(event, dueDate, priority, notes);
+        if (!storedEvents) {
+            storedEvents = [newEvent];
+        } else {
+            storedEvents = JSON.parse(storedEvents);
+            storedEvents.push(newEvent);
+        }
+        localStorage.setItem("events", JSON.stringify(storedEvents));
+    };
 };
