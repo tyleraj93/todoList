@@ -4,8 +4,6 @@ import { storageAvailable, retrieveLocalStorage } from "./localStorage";
 // I build a modal that creates a new event using
 // a form to collect needed info
 
-const planner = [];
-
 export default function buildEventModal(location) {
     // Builds the dialog modal
     const dialogContainer = document.createElement("div");
@@ -38,7 +36,7 @@ export default function buildEventModal(location) {
 
     // Input for event due date
     const dueDate = document.createElement("input");
-    dueDate.id = "dueDateInput"
+    dueDate.id = "dueDateInput";
     dueDate.className = "input due-date-input";
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("required", "required");
@@ -60,7 +58,7 @@ export default function buildEventModal(location) {
     const priorityLabel = document.createElement("label");
     priorityLabel.textContent = "Priority: ";
     priorityLabel.setAttribute("for", "priorityInput");
-    form.appendChild(priorityLabel)
+    form.appendChild(priorityLabel);
     form.appendChild(priority);
 
     // Priority options
@@ -154,5 +152,5 @@ function addEventLocal(event, dueDate, priority, notes) {
             storedEvents.push(newEvent);
         }
         localStorage.setItem("events", JSON.stringify(storedEvents));
-    };
-};
+    }
+}
