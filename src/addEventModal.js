@@ -1,4 +1,5 @@
 import Event from "./event";
+import logEventDate from "./sort";
 
 // I build a modal that creates a new event using
 // a form to collect needed info
@@ -6,6 +7,7 @@ import Event from "./event";
 const planner = [];
 
 export default function eventModal(location) {
+    // Builds the dialog modal
     const dialogContainer = document.createElement("div");
     dialogContainer.style.display = "none";
     dialogContainer.id = "dialogContainer";
@@ -55,7 +57,7 @@ export default function eventModal(location) {
     placeholder.disabled = true;
     placeholder.selected = true;
     placeholder.hidden = true;
-    placeholder.textContent = "Ugency:";
+    placeholder.textContent = "Urgency:";
     priority.appendChild(placeholder);
 
     let options = ["Low", "Medium", "High"];
@@ -140,4 +142,7 @@ function addEventLocal(event, dueDate, priority, notes) {
         storedEvents.push(newEvent);
     }
     localStorage.setItem("events", JSON.stringify(storedEvents));
+    for (let event of storedEvents) {
+        logEventDate(event);
+    }
 };
