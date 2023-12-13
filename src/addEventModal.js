@@ -17,49 +17,53 @@ export default function eventModal(location) {
     form.id = "addEventDialog";
     dialogContainer.appendChild(form);
 
-    const emptyP = document.createElement("p");
-    form.appendChild(emptyP);
-
-    const labels = document.createElement("label");
-    labels.setAttribute("for", "");
-    emptyP.appendChild(labels);
-
     const title = document.createElement("p");
     title.textContent = "New Event";
-    labels.appendChild(title);
+    form.appendChild(title);
 
     // Input for event title
     const event = document.createElement("input");
-    event.setAttribute("type", "text");
-    event.setAttribute("placeholder", "Event");
-    event.setAttribute("required", "required");
+    event.id = "eventInput";
     event.className = "input event-input";
-    labels.appendChild(event);
+    event.setAttribute("type", "text");
+    event.setAttribute("placeholder", "Event name");
+    event.setAttribute("required", "required");
+
+    // Label for event input
+    const eventLabel = document.createElement("label");
+    eventLabel.textContent = "Event: ";
+    eventLabel.setAttribute("for", "eventInput");
+    form.appendChild(eventLabel);
+    form.appendChild(event);
 
     // Input for event due date
     const dueDate = document.createElement("input");
+    dueDate.id = "dueDateInput"
+    dueDate.className = "input due-date-input";
     dueDate.setAttribute("type", "date");
-    dueDate.setAttribute("placeholder", "");
     dueDate.setAttribute("required", "required");
-    dueDate.className = "input date-input";
-    labels.appendChild(dueDate);
+
+    // Label for dueDate input
+    const dueDateLabel = document.createElement("label");
+    dueDateLabel.textContent = "Due date: ";
+    dueDateLabel.setAttribute("for", "dueDateInput");
+    form.appendChild(dueDateLabel);
+    form.appendChild(dueDate);
 
     // Input for event priority
     const priority = document.createElement("select");
-    priority.setAttribute("type", "text");
-    priority.required = true;
+    priority.id = "priorityInput";
     priority.className = "input priority-input";
-    labels.appendChild(priority);
+    priority.required = true;
 
-    // Creates a placeholder in the select dropdown
-    let placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    placeholder.hidden = true;
-    placeholder.textContent = "Urgency:";
-    priority.appendChild(placeholder);
+    // Label for priority input
+    const priorityLabel = document.createElement("label");
+    priorityLabel.textContent = "Priority: ";
+    priorityLabel.setAttribute("for", "priorityInput");
+    form.appendChild(priorityLabel)
+    form.appendChild(priority);
 
+    // Priority options
     let options = ["Low", "Medium", "High"];
 
     // Adds each option to the select dropdown
@@ -72,17 +76,24 @@ export default function eventModal(location) {
 
     // Input for additional notes
     const notes = document.createElement("input");
+    notes.id = "notesInput";
+    notes.className = "input notes-input";
     notes.setAttribute("type", "text");
     notes.setAttribute("placeholder", "Notes (optional)");
-    notes.className = "input notes-input";
-    labels.appendChild(notes);
+
+    // Label for notes input
+    const notesLabel = document.createElement("label");
+    notesLabel.textContent = "Notes: ";
+    notesLabel.setAttribute("for", "notesInput");
+    form.appendChild(notesLabel);
+    form.appendChild(notes);
 
     // Confirm button
     const confirm = document.createElement("button");
     confirm.type = "submit";
     confirm.id = "confirm";
     confirm.textContent = "Add event";
-    form.appendChild(confirm);
+    dialogContainer.appendChild(confirm);
 
     confirm.addEventListener("click", (e) => {
         e.preventDefault();
