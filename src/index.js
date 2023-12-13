@@ -1,13 +1,16 @@
 import helloWorldEvent from "./event.js";
-import helloWorldSort from "./sort.js";
-import helloWorldToDo from "./todo.js";
+import buildSortSection from "./sort.js";
+import buildToDoSection from "./todo.js";
 import helloWorldMonthly from "./monthly.js";
-import eventModal, { buildModalButton} from "./addEventModal.js";
+import buildEventModal, { buildModalButton } from "./addEventModal.js";
 
 const content = document.getElementById("content");
-eventModal(content);
+buildEventModal(content);
+buildSortSection(content);
+buildToDoSection(content);
 
 const modal = document.querySelector("#dialogContainer");
+// Takes in placement and modal location
 buildModalButton(content, modal);
 
 helloWorldEvent();
