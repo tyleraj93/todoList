@@ -153,7 +153,4 @@ function addEventLocal(event, dueDate, priority, notes) {
         storedEvents.push(newEvent);
     }
     localStorage.setItem("events", JSON.stringify(storedEvents));
-    for (let event of storedEvents) {
-        logEventDate(event);
-    }
 };
