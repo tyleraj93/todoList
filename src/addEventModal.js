@@ -139,7 +139,7 @@ function clearModalInputs() {
     });
 }
 
-// Adds new event to local storage after the "add event"
+// Adds and sorts new event to local storage after the "add event"
 // button is clicked
 function addEventLocal(event, dueDate, priority, notes) {
     if (storageAvailable("localStorage")) {
