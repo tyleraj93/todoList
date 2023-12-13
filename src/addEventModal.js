@@ -6,7 +6,7 @@ import { storageAvailable, retrieveLocalStorage } from "./localStorage";
 
 const planner = [];
 
-export default function eventModal(location) {
+export default function buildEventModal(location) {
     // Builds the dialog modal
     const dialogContainer = document.createElement("div");
     dialogContainer.style.display = "none";
