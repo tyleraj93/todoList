@@ -27,7 +27,8 @@ export function storageAvailable(type) {
     }
 };
 
-export function retrieveLocalStorage(itemName) {
-    const storedItems = localStorage.getItem(`${itemName}`);
-    return storedItems;
+export function retrieveLocalEvents(itemName) {
+    let eventsString = localStorage.getItem(`${itemName}`);
+    let events = JSON.parse(eventsString);
+    return events;
 };
