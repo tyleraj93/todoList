@@ -124,9 +124,6 @@ function sort(criteria) {
     clearTodoSection();
     const events = retrieveLocalEvents("events");
     let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth();
-    let day = today.getDate();
 
     switch (criteria) {
         case "today":
