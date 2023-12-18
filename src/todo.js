@@ -8,7 +8,6 @@ export default function buildTodoSection(location) {
 }
 
 export function buildTodoEvent(eventInfo) {
-    console.log(eventInfo._name);
     const todoSection = document.getElementById("todoSection");
 
     const eventDiv = document.createElement("div");
