@@ -7,6 +7,7 @@ export default class Event {
         this._date = date;
         this._priority = priority;
         this._notes = notes;
+        this._complete = false;
     }
 
     get name() {
@@ -23,5 +24,13 @@ export default class Event {
 
     get notes() {
         return this._notes;
+    }
+
+    get complete() {
+        return this._complete;
+    }
+
+    toggleCompleteStatus() {
+        this._complete = !this._complete;
     }
 }
