@@ -8,74 +8,163 @@ import { isToday, isSameWeek, isSameMonth } from "date-fns";
 export default function buildSortSection(location) {
     const sortSection = document.createElement("div");
     sortSection.id = "sortSection";
+    location.appendChild(sortSection);
 
     const todoText = document.createElement("p");
     todoText.textContent = "Todo";
     todoText.classList.add("sidebar-text");
     sortSection.appendChild(todoText);
 
+    const sortByDateSection = document.createElement("div");
+    sortByDateSection.classList.add("by-date");
+    sortSection.appendChild(sortByDateSection);
+
     const todayButton = document.createElement("button");
     todayButton.textContent = "Today";
-    todayButton.classList.add("sidebar-text");
-    todayButton.addEventListener("click", () => sortToday());
-    sortSection.appendChild(todayButton);
+    todayButton.classList.add("sidebar-button");
+    todayButton.addEventListener("click", () => sort("today"));
+    sortByDateSection.appendChild(todayButton);
 
     const weekButton = document.createElement("button");
     weekButton.textContent = "This week";
-    weekButton.classList.add("sidebar-text");
-    weekButton.addEventListener("click", () => sortWeek());
-    sortSection.appendChild(weekButton);
+    weekButton.classList.add("sidebar-button");
+    weekButton.addEventListener("click", () => sort("week"));
+    sortByDateSection.appendChild(weekButton);
 
     const monthButton = document.createElement("button");
     monthButton.textContent = "This month";
-    monthButton.classList.add("sidebar-text");
-    monthButton.addEventListener("click", () => sortMonth());
-    sortSection.appendChild(monthButton);
+    monthButton.classList.add("sidebar-button");
+    monthButton.addEventListener("click", () => sort("month"));
+    sortByDateSection.appendChild(monthButton);
 
-    location.appendChild(sortSection);
+    const sortByCompletionSection = document.createElement("div");
+    sortByCompletionSection.classList.add("by-completion");
+    sortSection.appendChild(sortByCompletionSection);
+
+    const completeButton = document.createElement("button");
+    completeButton.textContent = "Complete";
+    completeButton.classList.add("sidebar-button")
+    completeButton.addEventListener("click", () => sort("complete"));
+    sortByCompletionSection.appendChild(completeButton);
+
+    const incompleteButton = document.createElement("button");
+    incompleteButton.textContent = "Incomplete";
+    incompleteButton.classList.add("sidebar-button");
+    incompleteButton.addEventListener("click", () => sort("incomplete"));
+    sortByCompletionSection.appendChild(incompleteButton);
+
+
 }
-
-let today = new Date();
-let year = today.getFullYear();
-let month = today.getMonth() + 1;
-let day = today.getDate();
 
 function clearTodoSection() {
     const todoSection = document.getElementById("todoSection");
     todoSection.textContent = "";
 }
 
-function sortToday() {
+// let today = new Date();
+// let year = today.getFullYear();
+// let month = today.getMonth() + 1;
+// let day = today.getDate();
+
+// function sortToday() {
+//     clearTodoSection();
+//     const events = retrieveLocalEvents("events");
+//     for (const event of events) {
+//         const eventDay = event._date;
+//         if (eventDay == `${year}-${month}-${day}`) {
+//             buildTodoEvent(event);
+//         };
+//     }
+// };
+
+// function sortWeek() {
+//     clearTodoSection();
+//     const events = retrieveLocalEvents("events");
+//     for (const event of events) {
+//         const eventDay = new Date(event._date);
+//         if (isSameWeek(today, eventDay)) {
+//             buildTodoEvent(event);
+//         }
+//     }
+// }
+
+
+// function sortMonth() {
+//     clearTodoSection();
+//     const events = retrieveLocalEvents("events");
+//     for (const event of events) {
+//         const eventDay = new Date(event._date);
+//         if (isSameMonth(today, eventDay)) {
+//             buildTodoEvent(event);
+//         }
+//     }
+// }
+
+// function sortComplete() {
+//     clearTodoSection();
+//     const events = retrieveLocalEvents("events");
+//     for (const event of events) {
+//         if (event._complete) {
+//             buildTodoEvent(event);
+//         }
+//     }
+// }
+
+// function sortIncomplete() {
+//     clearTodoSection();
+//     const events = retrieveLocalEvents("events");
+//     for (const event of events) {
+//         if (!event._complete) {
+//             buildTodoEvent(event);
+//         }
+//     }
+// }
+
+function sort(criteria) {
     clearTodoSection();
     const events = retrieveLocalEvents("events");
-    for (const event of events) {
-        const eventDay = event._date;
-        console.log(`${year}-${month}-${day}`);
-        if (eventDay == `${year}-${month}-${day}`) {
-            buildTodoEvent(event);
-        };
-    }
-};
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth();
+    let day = today.getDate();
 
-function sortWeek() {
-    clearTodoSection();
-    const events = retrieveLocalEvents("events");
-    for (const event of events) {
-        const eventDay = new Date(event._date);
-        if (isSameWeek(today, eventDay)) {
-            buildTodoEvent(event);
-        }
-    }
-}
-
-
-function sortMonth() {
-    clearTodoSection();
-    const events = retrieveLocalEvents("events");
-    for (const event of events) {
-        const eventDay = new Date(event._date);
-        if (isSameMonth(today, eventDay)) {
-            buildTodoEvent(event);
-        }
+    switch (criteria) {
+        case "today":
+            events.forEach((event) => {
+                if (event._date === today.toISOString().split("T")[0]) {
+                    buildTodoEvent(event);
+                }
+            });
+            break;
+        case "week":
+            events.forEach((event) => {
+                let eventDate = new Date(event._date);
+                if (isSameWeek(today, eventDate)) {
+                    buildTodoEvent(event);
+                }
+            });
+            break;
+        case "month":
+            events.forEach((event) => {
+                let eventDate = new Date(event._date);
+                if (isSameMonth(today, eventDate)) {
+                    buildTodoEvent(event);
+                }
+            });
+            break;
+        case "complete":
+            events.forEach((event) => {
+                if (event._complete) {
+                    buildTodoEvent(event);
+                }
+            });
+            break;
+        case "incomplete":
+            events.forEach((event) => {
+                if (!event._complete) {
+                    buildTodoEvent(event);
+                }
+            });
+            break;
     }
 }
