@@ -2,7 +2,7 @@ import { retrieveLocalEvents } from "./localStorage";
 import { buildTodoEvent } from "./todo";
 import { isToday, isSameWeek, isSameMonth } from "date-fns";
 // I build the sidebar with buttons to sort by
-// today, this week, this month, all projects,
+// today, this week, this month, incomplete,
 // and completed
 
 export default function buildSortSection(location) {
@@ -60,65 +60,6 @@ function clearTodoSection() {
     const todoSection = document.getElementById("todoSection");
     todoSection.textContent = "";
 }
-
-// let today = new Date();
-// let year = today.getFullYear();
-// let month = today.getMonth() + 1;
-// let day = today.getDate();
-
-// function sortToday() {
-//     clearTodoSection();
-//     const events = retrieveLocalEvents("events");
-//     for (const event of events) {
-//         const eventDay = event._date;
-//         if (eventDay == `${year}-${month}-${day}`) {
-//             buildTodoEvent(event);
-//         };
-//     }
-// };
-
-// function sortWeek() {
-//     clearTodoSection();
-//     const events = retrieveLocalEvents("events");
-//     for (const event of events) {
-//         const eventDay = new Date(event._date);
-//         if (isSameWeek(today, eventDay)) {
-//             buildTodoEvent(event);
-//         }
-//     }
-// }
-
-
-// function sortMonth() {
-//     clearTodoSection();
-//     const events = retrieveLocalEvents("events");
-//     for (const event of events) {
-//         const eventDay = new Date(event._date);
-//         if (isSameMonth(today, eventDay)) {
-//             buildTodoEvent(event);
-//         }
-//     }
-// }
-
-// function sortComplete() {
-//     clearTodoSection();
-//     const events = retrieveLocalEvents("events");
-//     for (const event of events) {
-//         if (event._complete) {
-//             buildTodoEvent(event);
-//         }
-//     }
-// }
-
-// function sortIncomplete() {
-//     clearTodoSection();
-//     const events = retrieveLocalEvents("events");
-//     for (const event of events) {
-//         if (!event._complete) {
-//             buildTodoEvent(event);
-//         }
-//     }
-// }
 
 function sort(criteria) {
     clearTodoSection();
