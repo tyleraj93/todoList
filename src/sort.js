@@ -1,6 +1,6 @@
 import { retrieveLocalEvents } from "./localStorage";
 import { buildTodoEvent } from "./todo";
-import { isToday, isSameWeek, isSameMonth } from "date-fns";
+import { isSameWeek, isSameMonth } from "date-fns";
 // I build the sidebar with buttons to sort by
 // today, this week, this month, incomplete,
 // and completed
