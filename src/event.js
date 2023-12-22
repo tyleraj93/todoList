@@ -2,7 +2,7 @@
 
 // Add a new event
 export default class Event {
-    constructor(name, date, priority, notes) {
+    constructor(name, date, priority, notes = "") {
         this._name = name;
         this._date = date;
         this._priority = priority;
