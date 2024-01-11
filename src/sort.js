@@ -68,7 +68,6 @@ function sort(criteria) {
 
     switch (criteria) {
         case "today":
-            console.log("today");
             events.forEach((event) => {
                 if (event._date === today.toLocaleDateString("en-CA")) {
                     buildTodoEvent(event);
