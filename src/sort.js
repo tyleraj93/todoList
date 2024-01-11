@@ -55,7 +55,7 @@ export default function buildSortSection(location) {
 }
 
 function clearTodoSection() {
-    const todoSection = document.getElementById("todoSection");
+    const todoSection = document.querySelector(".todoSection")
     todoSection.textContent = "";
 }
 
