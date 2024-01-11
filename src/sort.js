@@ -43,7 +43,7 @@ export default function buildSortSection(location) {
 
     const completeButton = document.createElement("button");
     completeButton.textContent = "Complete";
-    completeButton.classList.add("sidebar-button")
+    completeButton.classList.add("sidebar-button");
     completeButton.addEventListener("click", () => sort("complete"));
     sortByCompletionSection.appendChild(completeButton);
 
@@ -52,8 +52,6 @@ export default function buildSortSection(location) {
     incompleteButton.classList.add("sidebar-button");
     incompleteButton.addEventListener("click", () => sort("incomplete"));
     sortByCompletionSection.appendChild(incompleteButton);
-
-
 }
 
 function clearTodoSection() {
@@ -69,7 +67,10 @@ function sort(criteria) {
     switch (criteria) {
         case "today":
             events.forEach((event) => {
-                if (event._date === today.toLocaleDateString("en-CA")) {
+                if (
+                    event._date === today.toLocaleDateString("en-CA") &&
+                    event._complete === false
+                ) {
                     buildTodoEvent(event);
                 }
             });
@@ -77,7 +78,7 @@ function sort(criteria) {
         case "week":
             events.forEach((event) => {
                 let eventDate = new Date(event._date);
-                if (isSameWeek(today, eventDate)) {
+                if (isSameWeek(today, eventDate) && event._complete === false) {
                     buildTodoEvent(event);
                 }
             });
@@ -85,7 +86,10 @@ function sort(criteria) {
         case "month":
             events.forEach((event) => {
                 let eventDate = new Date(event._date);
-                if (isSameMonth(today, eventDate)) {
+                if (
+                    isSameMonth(today, eventDate) &&
+                    event._complete === false
+                ) {
                     buildTodoEvent(event);
                 }
             });
