@@ -2,12 +2,12 @@
 
 // Add a new event
 export default class Event {
-    constructor(name, date, priority, notes = "") {
+    constructor(name, date, priority, notes = "", complete = false) {
         this._name = name;
         this._date = date;
         this._priority = priority;
         this._notes = notes;
-        this._complete = false;
+        this._complete = complete;
     }
 
     get name() {
@@ -28,9 +28,5 @@ export default class Event {
 
     get complete() {
         return this._complete;
-    }
-
-    toggleCompleteStatus() {
-        this._complete = !this._complete;
     }
 }
