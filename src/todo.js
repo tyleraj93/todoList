@@ -1,3 +1,6 @@
+import Event from "./event";
+import { toggleCompleteStatus } from "./localStorage";
+
 // I display the selected projects in the range
 // selected from sort.
 
@@ -8,6 +11,7 @@ export default function buildTodoSection(location) {
 }
 
 export function buildTodoEvent(eventInfo) {
+    let myEvent = new Event(eventInfo._name, eventInfo._date, eventInfo._priority, eventInfo._notes)
     const todoSection = document.getElementById("todoSection");
 
     const eventDiv = document.createElement("div");
@@ -15,6 +19,9 @@ export function buildTodoEvent(eventInfo) {
     todoSection.appendChild(eventDiv);
 
     const completeButton = document.createElement("button");
+    completeButton.addEventListener("click", () => {
+        toggleCompleteStatus(myEvent);
+    })
     eventDiv.appendChild(completeButton);
 
     const eventTitle = document.createElement("p");
