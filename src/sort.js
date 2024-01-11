@@ -63,13 +63,14 @@ function clearTodoSection() {
 
 function sort(criteria) {
     clearTodoSection();
-    const events = retrieveLocalEvents("events");
+    let events = retrieveLocalEvents("events");
     let today = new Date();
 
     switch (criteria) {
         case "today":
+            console.log("today");
             events.forEach((event) => {
-                if (event._date === today.toISOString().split("T")[0]) {
+                if (event._date === today.toLocaleDateString("en-CA")) {
                     buildTodoEvent(event);
                 }
             });
