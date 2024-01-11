@@ -6,13 +6,14 @@ import { toggleCompleteStatus } from "./localStorage";
 
 export default function buildTodoSection(location) {
     const todoSection = document.createElement("div");
-    todoSection.id = "todoSection";
-    location.appendChild(todoSection);
+    todoSection.classList.add("todoSection");
+    location.appendChild(todoSection)
 }
 
 export function buildTodoEvent(eventInfo) {
-    let myEvent = new Event(eventInfo._name, eventInfo._date, eventInfo._priority, eventInfo._notes)
-    const todoSection = document.getElementById("todoSection");
+    let myEvent = new Event(eventInfo._name, eventInfo._date, eventInfo._priority, eventInfo._notes);
+    
+    const todoSection = document.querySelector(".todoSection");
 
     const eventDiv = document.createElement("div");
     eventDiv.classList.add("event-Div");
