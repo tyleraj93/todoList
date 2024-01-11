@@ -1,4 +1,27 @@
+import Event from "./event";
 
+// Adds and sorts new event to local storage after the "add event"
+// button is clicked
+export default function addEventLocal(
+    event,
+    dueDate,
+    priority,
+    notes,
+    complete
+) {
+    if (storageAvailable("localStorage")) {
+        let storedEvents = localStorage.getItem("events");
+        const newEvent = new Event(event, dueDate, priority, notes);
+        if (!storedEvents) {
+            storedEvents = [newEvent];
+        } else {
+            storedEvents = JSON.parse(storedEvents);
+            storedEvents.push(newEvent);
+        }
+        storedEvents.sort((a, b) => new Date(a._date) - new Date(b._date));
+        localStorage.setItem("events", JSON.stringify(storedEvents));
+    }
+}
 // Function that detects whether localStorage is both supported and available
 export function storageAvailable(type) {
     let storage;
@@ -25,10 +48,24 @@ export function storageAvailable(type) {
             storage.length !== 0
         );
     }
-};
+}
+// Removes an event from localStorage
+// Used to remove events before being marked complete
+export function toggleCompleteStatus(newEvent) {
+    let events = retrieveLocalEvents("events");
+    console.log(JSON.stringify(events));
+    console.log(JSON.stringify(newEvent));
+    for (let event of events) {
+        if (event._name === newEvent._name && event._date === newEvent._date) {
+            event._complete = !event._complete;
+        }
+        localStorage.setItem("events", JSON.stringify(events));
+    }
+    console.log(JSON.stringify(events));
+}
 
 export function retrieveLocalEvents(itemName) {
     let eventsString = localStorage.getItem(`${itemName}`);
     let events = JSON.parse(eventsString);
     return events;
-};
+}
