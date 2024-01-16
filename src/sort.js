@@ -63,6 +63,7 @@ function sort(criteria) {
     clearTodoSection();
     let events = retrieveLocalEvents("events");
     let today = new Date();
+    const todoSection = document.querySelector(".todoSection");
 
     switch (criteria) {
         case "today":
@@ -72,6 +73,7 @@ function sort(criteria) {
                     event._complete === false
                 ) {
                     buildTodoEvent(event);
+                    todoSection.id = "today";
                 }
             });
             break;
@@ -80,6 +82,7 @@ function sort(criteria) {
                 let eventDate = new Date(event._date);
                 if (isSameWeek(today, eventDate) && event._complete === false) {
                     buildTodoEvent(event);
+                    todoSection.id = "week";
                 }
             });
             break;
@@ -91,6 +94,7 @@ function sort(criteria) {
                     event._complete === false
                 ) {
                     buildTodoEvent(event);
+                    todoSection.id = "month";
                 }
             });
             break;
