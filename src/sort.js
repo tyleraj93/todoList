@@ -102,6 +102,7 @@ export function sort(criteria) {
             events.forEach((event) => {
                 if (event._complete) {
                     buildTodoEvent(event);
+                    todoSection.id = "complete";
                 }
             });
             break;
@@ -109,6 +110,7 @@ export function sort(criteria) {
             events.forEach((event) => {
                 if (!event._complete) {
                     buildTodoEvent(event);
+                    todoSection.id = "incomplete";
                 }
             });
             break;
