@@ -53,15 +53,12 @@ export function storageAvailable(type) {
 // Used to remove events before being marked complete
 export function toggleCompleteStatus(newEvent) {
     let events = retrieveLocalEvents("events");
-    console.log(JSON.stringify(events));
-    console.log(JSON.stringify(newEvent));
     for (let event of events) {
         if (event._name === newEvent._name && event._date === newEvent._date) {
             event._complete = !event._complete;
         }
         localStorage.setItem("events", JSON.stringify(events));
     }
-    console.log(JSON.stringify(events));
 }
 
 export function retrieveLocalEvents(itemName) {
