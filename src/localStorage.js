@@ -1,4 +1,5 @@
 import Event from "./event";
+import { sort } from "./sort";
 
 // Adds and sorts new event to local storage after the "add event"
 // button is clicked
@@ -53,12 +54,14 @@ export function storageAvailable(type) {
 // Used to remove events before being marked complete
 export function toggleCompleteStatus(newEvent) {
     let events = retrieveLocalEvents("events");
+    const todoSection = document.querySelector(".todoSection");
     for (let event of events) {
         if (event._name === newEvent._name && event._date === newEvent._date) {
             event._complete = !event._complete;
         }
         localStorage.setItem("events", JSON.stringify(events));
     }
+    sort(todoSection.id);
 }
 
 export function retrieveLocalEvents(itemName) {
