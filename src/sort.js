@@ -59,7 +59,7 @@ function clearTodoSection() {
     todoSection.textContent = "";
 }
 
-function sort(criteria) {
+export function sort(criteria) {
     clearTodoSection();
     let events = retrieveLocalEvents("events");
     let today = new Date();
