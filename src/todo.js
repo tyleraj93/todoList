@@ -1,5 +1,5 @@
 import Event from "./event"; // Import the Event class
-import { toggleCompleteStatus } from "./localStorage"; // Import function to toggle completion status of an event
+import { toggleCompleteStatus, deleteEvent } from "./localStorage"; // Import function to toggle completion status of an event
 
 // Function to create the main todo section in the UI
 export default function buildTodoSection(location) {
@@ -28,6 +28,12 @@ export function buildTodoEvent(eventInfo) {
         toggleCompleteStatus(myEvent); // Add event listener to toggle the status when clicked
     });
     eventDiv.appendChild(completeButton); // Append the button to the event div
+
+    const deleteButton = document.createElement("button"); //Create a button to delete an event
+    deleteButton.addEventListener("click", () => {
+        deleteEvent(myEvent); // Add event listener to delete the selected event
+    });
+    eventDiv.appendChild(deleteButton); // Append the button to the event div
 
     const eventTitle = document.createElement("p"); // Create a paragraph for the event title
     eventTitle.classList.add("event-title"); // Add a class for styling
