@@ -2,10 +2,13 @@ import Event from "./event"; // Import the Event class
 import { toggleCompleteStatus, deleteEvent } from "./localStorage"; // Import function to toggle completion status of an event
 
 // Function to create the main todo section in the UI
-export default function buildTodoSection(location) {
+export default function buildTodoSection() {
+
+    const content = document.getElementById("content");
+
     const todoSection = document.createElement("div"); // Create a div element for the todo section
     todoSection.classList.add("todoSection"); // Add a class for styling
-    location.appendChild(todoSection); // Append the todo section to the specified location
+    content.appendChild(todoSection); // Append the todo section to the specified location
 }
 
 // Function to build and display an individual todo event
@@ -22,18 +25,6 @@ export function buildTodoEvent(eventInfo) {
     const eventDiv = document.createElement("div"); // Create a div to hold the event information
     eventDiv.classList.add("event-Div"); // Add a class for styling
     todoSection.appendChild(eventDiv); // Append the event div to the todo section
-
-    const completeButton = document.createElement("button"); // Create a button to toggle completion status
-    completeButton.addEventListener("click", () => {
-        toggleCompleteStatus(myEvent); // Add event listener to toggle the status when clicked
-    });
-    eventDiv.appendChild(completeButton); // Append the button to the event div
-
-    const deleteButton = document.createElement("button"); //Create a button to delete an event
-    deleteButton.addEventListener("click", () => {
-        deleteEvent(myEvent); // Add event listener to delete the selected event
-    });
-    eventDiv.appendChild(deleteButton); // Append the button to the event div
 
     const eventTitle = document.createElement("p"); // Create a paragraph for the event title
     eventTitle.classList.add("event-title"); // Add a class for styling
@@ -54,4 +45,20 @@ export function buildTodoEvent(eventInfo) {
     eventPriority.classList.add("event-priority"); // Add a class for styling
     eventPriority.textContent = `${eventInfo._priority}`; // Set the text content to the event priority
     eventDiv.appendChild(eventPriority); // Append the priority to the event div
+
+    const completeButton = document.createElement("button"); // Create a button to toggle completion status
+    completeButton.textContent = "Complete";
+    completeButton.classList.add("complete-button")
+    completeButton.addEventListener("click", () => {
+        toggleCompleteStatus(myEvent); // Add event listener to toggle the status when clicked
+    });
+    eventDiv.appendChild(completeButton); // Append the button to the event div
+
+    const deleteButton = document.createElement("button"); //Create a button to delete an event
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete-button");
+    deleteButton.addEventListener("click", () => {
+        deleteEvent(myEvent); // Add event listener to delete the selected event
+    });
+    eventDiv.appendChild(deleteButton); // Append the button to the event div
 }
