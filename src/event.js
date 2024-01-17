@@ -1,6 +1,4 @@
-// I build new events and event functions like add and delete
-
-// Add a new event
+// Builds an event with the input from the add event modal
 export default class Event {
     constructor(name, date, priority, notes = "", complete = false) {
         this._name = name;
