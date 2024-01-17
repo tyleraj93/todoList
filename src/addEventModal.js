@@ -1,15 +1,19 @@
 import Event from "./event";
 import addEventLocal from "./localStorage";
+import { sort } from "./sort";
 
 // I build a modal that creates a new event using
 // a form to collect needed info
 
-export default function buildEventModal(location) {
+export default function buildEventModal() {
+
+    const content = document.getElementById("content");
+
     // Builds the dialog modal
     const dialogContainer = document.createElement("div");
     dialogContainer.style.display = "none";
     dialogContainer.id = "dialogContainer";
-    location.appendChild(dialogContainer);
+    content.appendChild(dialogContainer);
 
     const form = document.createElement("form");
     form.id = "addEventDialog";
@@ -97,6 +101,10 @@ export default function buildEventModal(location) {
     confirm.addEventListener("click", (e) => {
         e.preventDefault();
 
+        if (!notes.value) {
+            notes.value = "No notes";
+        }
+
         // Adds event to local storage
         addEventLocal(event.value, dueDate.value, priority.value, notes.value);
 
@@ -108,6 +116,9 @@ export default function buildEventModal(location) {
 
         // Changes buttons text content from confirm to +
         document.querySelector("#addButton").textContent = "+";
+
+        const todoSection = document.querySelector(".todoSection"); // Select the todo section
+        sort(todoSection.id);
     });
 }
 
