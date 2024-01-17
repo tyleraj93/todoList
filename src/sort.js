@@ -1,17 +1,22 @@
 import { retrieveLocalEvents } from "./localStorage";
 import { buildTodoEvent } from "./todo";
 import { isSameWeek, isSameMonth } from "date-fns";
+import { buildModalButton } from "./addEventModal";
 // Import necessary functions and libraries
 
 // Function to build sorting section in the UI
-export default function buildSortSection(location) {
+export default function buildSortSection() {
+
+    const content = document.getElementById("content");
+
     const sortSection = document.createElement("div"); // Create a div for the sort section
     sortSection.id = "sortSection"; // Assign an ID to the sort section
-    location.appendChild(sortSection); // Append the sort section to the given location
+
+    content.appendChild(sortSection); // Append the sort section to the content section
 
     // Add a paragraph for displaying "Todo" text
     const todoText = document.createElement("p");
-    todoText.textContent = "Todo";
+    todoText.textContent = "Tyler's Todo Manager";
     todoText.classList.add("sidebar-text");
     sortSection.appendChild(todoText);
 
@@ -48,7 +53,7 @@ export default function buildSortSection(location) {
 
     // Create and setup the "Complete" button
     const completeButton = document.createElement("button");
-    completeButton.textContent = "Complete";
+    completeButton.textContent = "Completed";
     completeButton.classList.add("sidebar-button");
     completeButton.addEventListener("click", () => sort("complete"));
     sortByCompletionSection.appendChild(completeButton);
@@ -59,6 +64,9 @@ export default function buildSortSection(location) {
     incompleteButton.classList.add("sidebar-button");
     incompleteButton.addEventListener("click", () => sort("incomplete"));
     sortByCompletionSection.appendChild(incompleteButton);
+
+    const modal = document.querySelector("#dialogContainer");
+    buildModalButton(sortSection, modal);
 }
 
 // Function to clear the todo section
@@ -118,6 +126,10 @@ export function sort(criteria) {
                     todoSection.id = "complete";
                 }
             });
+            const completedEvents = document.querySelectorAll(".complete-button");
+            for (let event of completedEvents) {
+                event.textContent = event.textContent === "Complete" ? "Undo" : "Complete";
+            }
             break;
         case "incomplete":
             // Filter and display incomplete events
