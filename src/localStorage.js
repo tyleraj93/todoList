@@ -59,8 +59,8 @@ export function toggleCompleteStatus(newEvent) {
         if (event._name === newEvent._name && event._date === newEvent._date) {
             event._complete = !event._complete;
         }
-        localStorage.setItem("events", JSON.stringify(events));
     }
+    localStorage.setItem("events", JSON.stringify(events));
     sort(todoSection.id);
 }
 
@@ -68,4 +68,20 @@ export function retrieveLocalEvents(itemName) {
     let eventsString = localStorage.getItem(`${itemName}`);
     let events = JSON.parse(eventsString);
     return events;
+}
+
+export function deleteEvent(myEvent) {
+    let events = retrieveLocalEvents("events");
+    const todoSection = document.querySelector(".todoSection");
+    for (let i = 0; i < events.length; i++) {
+        if (
+            events[i]._name === myEvent._name &&
+            events[i]._date === myEvent._date
+        ) {
+            events.splice(i, 1);
+            break;
+        }
+    }
+    localStorage.setItem("events", JSON.stringify(events));
+    sort(todoSection.id);
 }
