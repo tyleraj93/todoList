@@ -93,11 +93,19 @@ export default function buildEventModal(location) {
     confirm.textContent = "Add event";
     dialogContainer.appendChild(confirm);
 
+    // Confirms event with input in modal
     confirm.addEventListener("click", (e) => {
         e.preventDefault();
+
+        // Adds event to local storage
         addEventLocal(event.value, dueDate.value, priority.value, notes.value);
+
+        // Clears all inputs for modal
         clearModalInputs();
+
+        // Hides the modal
         changeModalDisplay(dialogContainer);
+
         // Changes buttons text content from confirm to +
         document.querySelector("#addButton").textContent = "+";
     });
@@ -111,13 +119,15 @@ export function buildModalButton(placementLocation, modalLocation) {
     placementLocation.appendChild(addButton);
     addButton.addEventListener("click", (e) => {
         e.preventDefault();
+
+        // Displays modal when the + button is clicked
         changeModalDisplay(modalLocation);
         addButton.textContent =
             modalLocation.style.display === "block" ? "Cancel" : "+";
     });
 }
 
-// Changes the display of the modal
+// Changes the display of the modal based on its current state
 function changeModalDisplay(modal) {
     if (modal.style.display == "none") {
         modal.style.display = "block";
@@ -128,11 +138,14 @@ function changeModalDisplay(modal) {
 
 // Clears the inputs of the modal
 function clearModalInputs() {
+
+    // Selects all inputs in the dialog container to be cleared
     const inputs = document.querySelectorAll("#dialogContainer input");
     inputs.forEach((input) => {
         input.value = "";
     });
 
+    // Resets the select drop down for urgency
     const selects = document.querySelectorAll("#dialogContainer select");
     selects.forEach((select) => {
         select.selectedIndex = 0;
