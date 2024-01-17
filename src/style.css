@@ -1,3 +1,93 @@
-.hello {
-    color: red;
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#content {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+        "sidebar content void"
+    ;
+}
+
+#sortSection {
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 2fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border-right: 1px solid black;
+}
+
+.by-date, .by-completion {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6vh;
+}
+
+.sidebar-button {
+    height: 5vh;
+    width: 12vw;
+    border-radius: 30px;
+}
+
+#addButton {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 5vh;
+}
+
+.todoSection {
+    grid-area: content;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: 1fr;
+    margin: 14vh 7vw;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.event-Div {
+    background-color: grey;
+    height: 20vh;
+    width: 42vw;
+    border-radius: 15px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    gap: 15px;
+}
+.event-Div button {
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.complete-button {
+    justify-self: start;
+    margin-left: 20px;
+}
+
+.delete-button {
+    justify-self: end;
+    margin-right: 20px;
+}
+
+#dialogContainer {
+    position: fixed;       /* Fixed position */
+    top: 50%;              /* Center vertically */
+    left: 50%;             /* Center horizontally */
+    transform: translate(-50%, -50%); /* Shift the modal to be centered */
+    border: 1px solid black;
+    width: 50%;
+    max-width: 600px;
+    background-color: white;
 }
