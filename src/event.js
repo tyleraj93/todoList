@@ -1,6 +1,6 @@
 // Builds an event with the input from the add event modal
 export default class Event {
-    constructor(name, date, priority, notes = "", complete = false) {
+    constructor(name, date, priority, notes, complete = false) {
         this._name = name;
         this._date = date;
         this._priority = priority;
