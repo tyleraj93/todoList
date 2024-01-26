@@ -28,22 +28,22 @@ export function buildTodoEvent(eventInfo) {
 
     const eventTitle = document.createElement("p"); // Create a paragraph for the event title
     eventTitle.classList.add("event-title"); // Add a class for styling
-    eventTitle.innerHTML = `<span class="underline">Todo:</span> ${eventInfo._name}`; // Set the text content to the event name
+    eventTitle.innerHTML = `<p class="eventP"><span class="underline title">Todo:</span> ${eventInfo._name}</p>`; // Set the text content to the event name
     eventDiv.appendChild(eventTitle); // Append the title to the event div
 
     const eventDueDate = document.createElement("p"); // Create a paragraph for the event due date
     eventDueDate.classList.add("event-due-date"); // Add a class for styling
-    eventDueDate.innerHTML = `<span class="underline">Date:</span> ${eventInfo._date}`; // Set the text content to the event due date
+    eventDueDate.innerHTML = `<p class="eventP"><span class="underline title">Date:</span> ${eventInfo._date}</p>`; // Set the text content to the event due date
     eventDiv.appendChild(eventDueDate); // Append the due date to the event div
 
     const eventNotes = document.createElement("p"); // Create a paragraph for the event notes
     eventNotes.classList.add("event-notes"); // Add a class for styling
-    eventNotes.innerHTML = `<span class="underline">Notes:</span> ${eventInfo._notes}`; // Set the text content to the event notes
+    eventNotes.innerHTML = `<p class="eventP"><span class="underline title">Notes:</span> ${eventInfo._notes}</p>`; // Set the text content to the event notes
     eventDiv.appendChild(eventNotes); // Append the notes to the event div
 
     const eventPriority = document.createElement("p"); // Create a paragraph for the event priority
     eventPriority.classList.add("event-priority"); // Add a class for styling
-    eventPriority.innerHTML = `<span class="underline">Priority:</span> ${eventInfo._priority}`; // Set the text content to the event priority
+    eventPriority.innerHTML = `<p class="eventP"><span class="underline title">Priority:</span> ${eventInfo._priority}</p>`; // Set the text content to the event priority
     eventDiv.appendChild(eventPriority); // Append the priority to the event div
 
     const completeButton = document.createElement("button"); // Create a button to toggle completion status
