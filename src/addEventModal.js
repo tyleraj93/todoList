@@ -1,6 +1,6 @@
-import Event from "./event";
 import addEventLocal from "./localStorage";
 import { sort } from "./sort";
+import { clearTodoSection } from "./sort";
 
 // I build a modal that creates a new event using
 // a form to collect needed info
@@ -15,13 +15,17 @@ export default function buildEventModal() {
     dialogContainer.id = "dialogContainer";
     content.appendChild(dialogContainer);
 
-    const form = document.createElement("form");
-    form.id = "addEventDialog";
-    dialogContainer.appendChild(form);
+    const gridContainer = document.createElement("div");
+    gridContainer.id = "gridContainer";
+    dialogContainer.appendChild(gridContainer);
 
     const title = document.createElement("p");
     title.textContent = "New Event";
-    form.appendChild(title);
+    gridContainer.appendChild(title);
+
+    const form = document.createElement("form");
+    form.id = "addEventDialog";
+    gridContainer.appendChild(form);
 
     // Input for event title
     const event = document.createElement("input");
@@ -35,6 +39,7 @@ export default function buildEventModal() {
     const eventLabel = document.createElement("label");
     eventLabel.textContent = "Event: ";
     eventLabel.setAttribute("for", "eventInput");
+    eventLabel.classList.add("underline");
     form.appendChild(eventLabel);
     form.appendChild(event);
 
@@ -49,6 +54,7 @@ export default function buildEventModal() {
     const dueDateLabel = document.createElement("label");
     dueDateLabel.textContent = "Due date: ";
     dueDateLabel.setAttribute("for", "dueDateInput");
+    dueDateLabel.classList.add("underline");
     form.appendChild(dueDateLabel);
     form.appendChild(dueDate);
 
@@ -62,6 +68,7 @@ export default function buildEventModal() {
     const priorityLabel = document.createElement("label");
     priorityLabel.textContent = "Priority: ";
     priorityLabel.setAttribute("for", "priorityInput");
+    priorityLabel.classList.add("underline");
     form.appendChild(priorityLabel);
     form.appendChild(priority);
 
@@ -87,6 +94,7 @@ export default function buildEventModal() {
     const notesLabel = document.createElement("label");
     notesLabel.textContent = "Notes: ";
     notesLabel.setAttribute("for", "notesInput");
+    notesLabel.classList.add("underline");
     form.appendChild(notesLabel);
     form.appendChild(notes);
 
@@ -95,7 +103,7 @@ export default function buildEventModal() {
     confirm.type = "submit";
     confirm.id = "confirm";
     confirm.textContent = "Add event";
-    dialogContainer.appendChild(confirm);
+    gridContainer.appendChild(confirm);
 
     // Confirms event with input in modal
     confirm.addEventListener("click", (e) => {
@@ -132,14 +140,15 @@ export function buildModalButton(placementLocation, modalLocation) {
         e.preventDefault();
 
         // Displays modal when the + button is clicked
+        clearTodoSection();
         changeModalDisplay(modalLocation);
         addButton.textContent =
-            modalLocation.style.display === "block" ? "Cancel" : "+";
+            modalLocation.style.display === "block" ? "x" : "+";
     });
 }
 
 // Changes the display of the modal based on its current state
-function changeModalDisplay(modal) {
+export function changeModalDisplay(modal) {
     if (modal.style.display == "none") {
         modal.style.display = "block";
     } else {
