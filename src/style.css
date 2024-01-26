@@ -1,3 +1,27 @@
+/* Nanum Brush Script */
+@font-face {
+    font-family: "NanumBrush";
+    src: url(./fonts/Nanum_Brush_Script/NanumBrushScript-Regular.ttf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Nunito Sans Italic */
+@font-face {
+    font-family: "NunitoSans";
+    src: url(./fonts/Nunito_Sans/NunitoSans-Italic-VariableFont_YTLC\,opsz\,wdth\,wght.ttf) format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* Nunito Sans Regular */
+@font-face {
+    font-family: "NunitoSans";
+    src: url(./fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --mint-green: #D6FFF6;
     --turquoise: #4DCCBD;
@@ -10,6 +34,7 @@
     margin: 0;
     padding: 0;
     border: none;
+    font-family: "NunitoSans";
 }
 
 body {
@@ -34,12 +59,13 @@ body {
     grid-template-rows: 1fr 3fr 2fr 1fr;
     align-items: center;
     justify-items: center;
-    border-right: 1px solid black;
+    border-right: 2px solid var(--night);
     background-color: var(--mint-green);
 }
 
-#sortSection button {
-    background-color: var(--turquoise);
+button {
+    background-color: var(--thistle);
+    border: 2px solid var(--night);
 }
 
 .by-date, .by-completion {
@@ -48,10 +74,16 @@ body {
     gap: 6vh;
 }
 
+.sidebar-text {
+    font-size: clamp(22px, 2vw, 32px);
+    text-align: center;
+}
+
 .sidebar-button {
     height: 5vh;
     width: 12vw;
     border-radius: 30px;
+    font-size: clamp(12px, 16px, 18px);
 }
 
 #addButton {
@@ -72,9 +104,11 @@ body {
 }
 
 .event-Div {
-    background-color: var(--thistle);
-    height: 20vh;
+    background-color: var(--mint-green);
+    height: clamp(150px, 20vh, 280px);
     width: 42vw;
+    overflow: auto;
+    border: 2px solid var(--night);
     border-radius: 15px;
     padding: 10px;
     display: grid;
@@ -84,9 +118,19 @@ body {
     align-items: center;
     gap: 15px;
 }
+
+.title {
+    font-size: 14px;
+}
+
+.event-Div p {
+    font-family: "NanumBrush";
+    font-size: 36px;
+}
+
 .event-Div button {
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 8px 14px;
+    border-radius: 16px;
 }
 
 .complete-button {
@@ -107,9 +151,39 @@ body {
     border: 1px solid black;
     width: 50%;
     max-width: 600px;
-    background-color: white;
+    background-color: var(--mint-green);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#gridContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-items: center;
+}
+
+#addEventDialog {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    justify-items: center;
+}
+
+.eventP {
+    text-align: center;
+}
+
+#confirm {
+    padding: 5px;
+    border-radius: 16px;
+}
+
+.input {
+    border: 1px solid var(--night);
+    padding: 2px;
 }
 
 .underline {
-    text-decoration: underline;
+    text-decoration: underline var(--night) 2px;
 }
