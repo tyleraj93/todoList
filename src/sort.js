@@ -1,7 +1,7 @@
 import { retrieveLocalEvents } from "./localStorage";
 import { buildTodoEvent } from "./todo";
 import { isSameWeek, isSameMonth } from "date-fns";
-import { buildModalButton } from "./addEventModal";
+import { buildModalButton, changeModalDisplay } from "./addEventModal";
 // Import necessary functions and libraries
 
 // Function to build sorting section in the UI
@@ -15,7 +15,7 @@ export default function buildSortSection() {
     content.appendChild(sortSection); // Append the sort section to the content section
 
     // Add a paragraph for displaying "Todo" text
-    const todoText = document.createElement("p");
+    const todoText = document.createElement("h1");
     todoText.textContent = "Tyler's Todo Manager";
     todoText.classList.add("sidebar-text");
     sortSection.appendChild(todoText);
@@ -70,7 +70,7 @@ export default function buildSortSection() {
 }
 
 // Function to clear the todo section
-function clearTodoSection() {
+export function clearTodoSection() {
     const todoSection = document.querySelector(".todoSection");
     todoSection.textContent = ""; // Clear the content of the todo section
 }
@@ -78,6 +78,10 @@ function clearTodoSection() {
 // Function to sort events based on different criteria
 export function sort(criteria) {
     clearTodoSection(); // Clear the existing todo items
+    if (document.getElementById("dialogContainer").style.display === "block") {
+        changeModalDisplay(document.getElementById("dialogContainer"));
+        document.getElementById("addButton").textContent = "+";
+    }
     let events = retrieveLocalEvents("events"); // Retrieve events from local storage
     let today = new Date(); // Get the current date
     const todoSection = document.querySelector(".todoSection"); // Select the todo section
